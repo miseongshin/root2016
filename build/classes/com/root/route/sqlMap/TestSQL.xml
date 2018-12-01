@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="test">
+	<select id="testList" resultClass="hashmap">
+	SELECT no as "no",
+	       name as "name",
+	       del_yn as "delYn"
+	  FROM test	
+	</select>
+	
+	<select id="userSelect" resultClass="hashmap">
+	
+SELECT user_no, user_id, user_nm, user_desc, del_yn
+  FROM user_table
+<!--  WHERE del_yn='N' -->
+
+	</select>
+	
+		<insert id="setUser" parameterClass="hashmap">
+	
+insert into user_table(user_no, user_id, user_nm, user_desc)
+                values(user_table_seq.nextval, #user_id#, #user_nm#, #user_desc#)
+
+	</insert>
+	<update id ="updateUser" parameterClass="hashmap">
+update user_table 
+   set user_nm=#user_nm#,
+       user_desc=#user_desc#
+ WHERE user_id=#user_id#	
+	</update>
+	<update  id="dUpdateUser" parameterClass="hashmap">
+	 update user_table 
+   set del_yn='Y'
+ WHERE user_id=#user_id#
+	</update>
+	
+	<select id="mapList" parameterClass="hashmap" resultClass="hashmap" >
+	SELECT MAP_NO as mapNo,
+	 	   MAP_ID as mapId,
+	       MAP_NM as mapNm,
+	       MAP_DESC as mapDesc,
+	       LATITUDE as laitude,
+	       LONGITUDE as longitude,
+	       DEL_YN as delYn
+	  FROM MAP_MST
+	  WHERE   DEL_YN = 'N'
+	  <isNotNull prepend="AND" property="mapNo">
+	     MAP_NO = #mapNo#
+	  </isNotNull>
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,40 @@
+<div id="right1" class="main_div">
+	<h1>환영합니다.</h1>
+	<input type="button" value="회원 등록" ng-click="fn_add_event();" />
+	<ul>
+		<li ng-repeat="row1 in dataSource">
+			<div class="table_css">
+				<div>
+					아이디 : <input type="text" id="user_id" value="{{row1.USER_ID}}" />
+				</div>
+				<div>
+					이름 : <input type="text" id="user_nm" value="{{row1.USER_NM}}" />
+				</div>
+				<div>
+					설명 : <input type="text" id="user_desc" value="{{row1.USER_DESC}}" />
+				</div>
+				<div>
+					<input type="button" value="수정" ng-if="$index != row_max_index"				                                     		
+						ng-click="fn_save_event('U',row1.USER_ID, $index);"> 
+					<input type="button" value="삭제" ng-if="$index != row_max_index"
+						ng-click="fn_save_event('D',row1.USER_ID, $index);">
+					<input type="button" value="등록" ng-if="$index == row_max_index"
+						ng-click="fn_save_event('I','',$index);"> 
+				</div>
+			</div>
+		</li>
+	</ul>
+	<!-- 	<div id="inputForm">
+	    ID   : <input type="text" id="iUser_id" width="50"><br>
+		이름 :   <input type="text" id="iUser_nm"><br>
+		설명 :   <input type="text" id="iUser_desc"><br>	
+		<input type="button" value="등록" ng-click="fn_save_event('I')"/>
+	
+	</div> -->
+
+
+	<!-- 	<a href="#index2/name=test|id=bye">다음 화면</a> -->
+</div>
+
+
+
